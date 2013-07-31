@@ -93,6 +93,7 @@ public class UserManager {
         catch(java.lang.ArrayIndexOutOfBoundsException exc)
         {return null;}
         Users u = result.get(0);
+        em.close();
         return u;
     }
     
@@ -108,8 +109,9 @@ public class UserManager {
            UserRes = UserManager.QueryByName(Nick);
            if(UserRes == null)
            {System.out.println("User doesn't exist! Register?");
-           set_log(false);}
-           if(passhash.equals(UserRes.getPass()))
+           set_log(false);
+           }
+           else if(passhash.equals(UserRes.getPass()))
            {
             setUid(UserRes.getId());
             setNick(Nick);
@@ -140,7 +142,6 @@ public class UserManager {
         em.persist(user);
         em.getTransaction().commit();
         em.close();
-        UserLogin(Nick, Pass);
     }
 }
 

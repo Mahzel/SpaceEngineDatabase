@@ -23,14 +23,16 @@ import org.openide.util.lookup.Lookups;
 public class StarChildrenFactory extends ChildFactory<Object>{
     Star pStar;
     boolean[] fFlags;
+    String[] fStrings;
     
     public StarChildrenFactory(Star sta) {
         this.pStar = sta;
     }
     
-    public StarChildrenFactory(Star sta, boolean[] f) {
+    public StarChildrenFactory(Star sta, boolean[] f, String[] s) {
         this.pStar = sta;
         this.fFlags = f;
+        this.fStrings = s;
     }
     
     @Override
@@ -73,7 +75,7 @@ public class StarChildrenFactory extends ChildFactory<Object>{
             Children.create(new StarChildrenFactory(sta), true),
             Lookups.singleton(key));}
         else{result = new AbstractNode(
-            Children.create(new StarChildrenFactory(sta, fFlags), true),
+            Children.create(new StarChildrenFactory(sta, fFlags, fStrings), true),
             Lookups.singleton(key));}
     result.setDisplayName(sta.getName());}
     return result;}

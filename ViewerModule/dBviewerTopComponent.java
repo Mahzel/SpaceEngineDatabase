@@ -32,13 +32,12 @@ import org.openide.windows.WindowManager;
         persistenceType = TopComponent.PERSISTENCE_NEVER)
 @TopComponent.Registration(mode = "properties", openAtStartup = true)
 @ActionID(category = "Window", id = "org.SpaceEngineDatabase.ViewerModule.dBviewerTopComponent")
-@ActionReference(path = "Menu/Window" /*, position = 333 */)
 @TopComponent.OpenActionRegistration(
         displayName = "#CTL_dBviewerAction",
         preferredID = "dBviewerTopComponent")
 @Messages({
     "CTL_dBviewerAction=dBviewer",
-    "CTL_dBviewerTopComponent=dBviewer Window",
+    "CTL_dBviewerTopComponent=Universe Explorer",
     "HINT_dBviewerTopComponent=This is a dBviewer window"
 })
 public final class dBviewerTopComponent extends TopComponent implements ExplorerManager.Provider {
@@ -77,15 +76,15 @@ public final class dBviewerTopComponent extends TopComponent implements Explorer
     
     public void refresh()
     { TopComponent tcf = WindowManager.getDefault().findTopComponent("FiltersTopComponent");
-        if(tcf != null && tcf.isOpened())
-        {FiltersTopComponent ftc = (FiltersTopComponent)tcf;
-            fFlags = ftc.fFlags;
-            fStrings = ftc.fStrings;
-        mgr.setRootContext(new AbstractNode(Children.create(new UniverseChildrenFactory(fFlags), true)));
+       FiltersTopComponent ftc = (FiltersTopComponent)tcf;
+       fFlags = ftc.fFlags;
+       fStrings = ftc.fStrings;
+       if(fFlags[5]){
+        mgr.setRootContext(new AbstractNode(Children.create(new UniverseChildrenFactory(fFlags, fStrings), true)));
         mgr.getRootContext().setName("Universe");
-        }
+       }
         else{noFilterTree();}
-        }
+    }
     
     public void refreshAction(ActionEvent evt)  
     {  refresh();

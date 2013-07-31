@@ -31,7 +31,7 @@ import org.openide.windows.WindowManager;
         preferredID = "InsertWinTopComponent")
 @Messages({
     "CTL_InsertWinAction=InsertWin",
-    "CTL_InsertWinTopComponent=InsertWin Window",
+    "CTL_InsertWinTopComponent=Insertion Window",
     "HINT_InsertWinTopComponent=This is a InsertWin window"
 })
 public final class InsertWinTopComponent extends TopComponent {

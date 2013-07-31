@@ -175,7 +175,8 @@ public class InsertManager {
      * @param flags  
      */
     public void BuildManager(String n, String o, String t, String i, String a, String[] s, Map flags)
-    {   gFlags = flags;
+    {   this.g = null;this.c = null;this.n = null;this.s=null;this.p=null;this.m=null;
+        gFlags = flags;
         Boolean debug = false;
         this.name = n;
         if(debug)System.out.println("Debug : Name :"+this.name);
@@ -345,7 +346,6 @@ public class InsertManager {
             em.close();
             m = queryBodyByName(m.getName());
         }
-        g = null;c = null;n = null;s=null;p=null;m=null;
     }
         
     

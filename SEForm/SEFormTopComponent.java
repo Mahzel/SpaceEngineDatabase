@@ -15,6 +15,7 @@ import org.openide.windows.TopComponent;
 import org.openide.util.NbBundle.Messages;
 import org.openide.util.lookup.Lookups;
 import org.openide.windows.WindowManager;
+import org.openide.LifecycleManager; 
 
 /**
  * Top component which displays something.
@@ -28,7 +29,6 @@ import org.openide.windows.WindowManager;
         persistenceType = TopComponent.PERSISTENCE_ALWAYS)
 @TopComponent.Registration(mode = "LoginMode", openAtStartup = true)
 @ActionID(category = "Window", id = "org.SpaceEngineDatabase.SEForm.SEFormTopComponent")
-@ActionReference(path = "Menu/Window" /*,position = 333*/)
 @TopComponent.OpenActionRegistration(
         displayName = "#CTL_SEFormAction",
         preferredID = "SEFormTopComponent")
@@ -190,15 +190,15 @@ public final class SEFormTopComponent extends TopComponent{
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(!um.getLog()){
         um.UserLogin(jTextField1.getText(), jPasswordField1.getText());
+        iw = (InsertWinTopComponent)WindowManager.getDefault().findTopComponent("InsertWinTopComponent");
         if(um.getLog())
         {jLabel3.setText(um.getNick()+" logged in!");
-        iw = (InsertWinTopComponent)WindowManager.getDefault().findTopComponent("InsertWinTopComponent");
         iw.setEnabled(true);
         iw.jButton1.setEnabled(true);
         jButton2.setEnabled(false);
         jButton1.setText("Logout");}
         else{jLabel3.setText("Invalid login.");}
-}
+        }
         else{um.set_log(false);
         jButton2.setEnabled(true);
         jButton1.setText("Login");
@@ -208,9 +208,10 @@ public final class SEFormTopComponent extends TopComponent{
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         um.UserRegister(jTextField1.getText(), jPasswordField1.getText());
-        if(um.getLog())
-        {jLabel3.setText(um.getNick()+" registered. Welcome!");
+        um.UserLogin(jTextField1.getText(), jPasswordField1.getText());
         iw = (InsertWinTopComponent)WindowManager.getDefault().findTopComponent("InsertWinTopComponent");
+        if(um.getLog())
+        {jLabel3.setText(um.getNick()+" logged in!");
         iw.setEnabled(true);
         iw.jButton1.setEnabled(true);
         jButton2.setEnabled(false);

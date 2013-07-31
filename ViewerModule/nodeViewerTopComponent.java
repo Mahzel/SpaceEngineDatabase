@@ -18,6 +18,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.Collection;
+import java.util.Date;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import org.netbeans.api.settings.ConvertAsProperties;
@@ -43,13 +44,12 @@ import org.openide.windows.WindowManager;
         persistenceType = TopComponent.PERSISTENCE_NEVER)
 @TopComponent.Registration(mode = "explorer", openAtStartup = true)
 @ActionID(category = "Window", id = "org.SpaceEngineDatabase.ViewerModule.nodeViewerTopComponent")
-@ActionReference(path = "Menu/Window" /*, position = 333 */)
 @TopComponent.OpenActionRegistration(
         displayName = "#CTL_nodeViewerAction",
         preferredID = "nodeViewerTopComponent")
 @Messages({
     "CTL_nodeViewerAction=nodeViewer",
-    "CTL_nodeViewerTopComponent=nodeViewer Window",
+    "CTL_nodeViewerTopComponent=Object Viewer",
     "HINT_nodeViewerTopComponent=This is a nodeViewer window"
 })
 public final class nodeViewerTopComponent extends TopComponent implements LookupListener {
@@ -302,7 +302,8 @@ public final class nodeViewerTopComponent extends TopComponent implements Lookup
             gal = GallEvents.iterator().next();
             jTextField1.setText(gal.getName());
             jTextField2.setText(gal.getDiscoverer().getUser());
-            jTextField3.setText(gal.getDate().toString());
+            try{jTextField3.setText(gal.getDate().toString());}
+            catch(NullPointerException e){}
             jTextField4.setText(gal.getImgUrl());
             jTextArea1.setText(gal.getObserv());
             jLabel6.setText("Galaxy");
@@ -315,7 +316,8 @@ public final class nodeViewerTopComponent extends TopComponent implements Lookup
             neb = NallEvents.iterator().next();
             jTextField1.setText(neb.getName());
             jTextField2.setText(neb.getDiscoverer().getUser());
-            jTextField3.setText(neb.getDiscdate().toString());
+            try{jTextField3.setText(neb.getDiscdate().toString());}
+            catch(NullPointerException e){}
             jTextField4.setText(neb.getImgUrl());
             jTextArea1.setText(neb.getObservations());
             jLabel6.setText("Nebula");
@@ -328,7 +330,8 @@ public final class nodeViewerTopComponent extends TopComponent implements Lookup
             clu = CallEvents.iterator().next();
             jTextField1.setText(clu.getName());
             jTextField2.setText(clu.getDiscoverer().getUser());
-            jTextField3.setText(clu.getDiscdate().toString());
+            try{jTextField3.setText(clu.getDiscdate().toString());}
+            catch(NullPointerException e){}
             jTextField4.setText(clu.getImgUrl());
             jTextArea1.setText(clu.getObservations());
             jLabel6.setText("Cluster");
@@ -341,7 +344,8 @@ public final class nodeViewerTopComponent extends TopComponent implements Lookup
             sta = SallEvents.iterator().next();
             jTextField1.setText(sta.getName());
             jTextField2.setText(sta.getDiscoverer().getUser());
-            jTextField3.setText(sta.getDate().toString());
+            try{jTextField3.setText(sta.getDate().toString());}
+            catch(NullPointerException e){}
             jTextField4.setText(sta.getImgUrl());
             jTextArea1.setText(sta.getObservations());
             gal = null;
@@ -355,7 +359,8 @@ public final class nodeViewerTopComponent extends TopComponent implements Lookup
             pla = PallEvents.iterator().next();
             jTextField1.setText(pla.getName());
             jTextField2.setText(pla.getDiscoverer().getUser());
-            jTextField3.setText(pla.getDate().toString());
+            try{jTextField3.setText(pla.getDate().toString());}
+            catch(NullPointerException e){}
             jTextField4.setText(pla.getImgUrl());
             jTextArea1.setText(pla.getObservations());
             gal = null;
@@ -368,6 +373,8 @@ public final class nodeViewerTopComponent extends TopComponent implements Lookup
                 jLabel6.setText("Asteroid");}
             else{jLabel6.setText("Moon");
             }}
+        if(jTextField3.getText().equals("Date"))
+        {jTextField3.setText(new java.sql.Timestamp(new Date().getTime()).toString());}
         BufferedImage img = null;
         try{img = ImageIO.read(new URL(jTextField4.getText()));
             ip = new imagePanel(img);

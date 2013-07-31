@@ -24,26 +24,26 @@ import org.openide.windows.WindowManager;
         persistenceType = TopComponent.PERSISTENCE_ALWAYS)
 @TopComponent.Registration(mode = "Filters", openAtStartup = true)
 @ActionID(category = "Window", id = "org.SpaceEngineDatabase.ViewerModule.FiltersTopComponent")
-@ActionReference(path = "Menu/Window" /*, position = 333 */)
 @TopComponent.OpenActionRegistration(
         displayName = "#CTL_FiltersAction",
         preferredID = "FiltersTopComponent")
 @Messages({
     "CTL_FiltersAction=Filters",
-    "CTL_FiltersTopComponent=Filters Window",
+    "CTL_FiltersTopComponent=Filters",
     "HINT_FiltersTopComponent=This is a Filters window"
 })
 public final class FiltersTopComponent extends TopComponent {
 
     public FiltersTopComponent() {
         initComponents();
-        fFlags = new boolean[5];
+        fFlags = new boolean[6];
         fStrings = new String[2];
         fFlags[0] = true;
         fFlags[1] = true;
         fFlags[2] = true;
         fFlags[3] = true;
         fFlags[4] = true;
+        fFlags[5] = false;
         Lookups.singleton(fFlags);
         Lookups.singleton(fStrings);
         setName(Bundle.CTL_FiltersTopComponent());
@@ -74,8 +74,8 @@ public final class FiltersTopComponent extends TopComponent {
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jTextField2 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
 
         jCheckBox2.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(jCheckBox2, org.openide.util.NbBundle.getMessage(FiltersTopComponent.class, "FiltersTopComponent.jCheckBox2.text")); // NOI18N
@@ -105,9 +105,14 @@ public final class FiltersTopComponent extends TopComponent {
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(FiltersTopComponent.class, "FiltersTopComponent.jLabel2.text")); // NOI18N
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jTextField2.setText(org.openide.util.NbBundle.getMessage(FiltersTopComponent.class, "FiltersTopComponent.jTextField2.text")); // NOI18N
+
+        org.openide.awt.Mnemonics.setLocalizedText(jButton2, org.openide.util.NbBundle.getMessage(FiltersTopComponent.class, "FiltersTopComponent.jButton2.text")); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -116,7 +121,10 @@ public final class FiltersTopComponent extends TopComponent {
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(30, 30, 30)
+                        .addComponent(jButton2))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jCheckBox2)
@@ -127,15 +135,13 @@ public final class FiltersTopComponent extends TopComponent {
                                 .addComponent(jCheckBox6, javax.swing.GroupLayout.Alignment.LEADING)))
                         .addGap(54, 54, 54)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(33, 33, 33)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(28, Short.MAX_VALUE))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                            .addComponent(jTextField2))))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,44 +153,53 @@ public final class FiltersTopComponent extends TopComponent {
                     .addComponent(jLabel1))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox5))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel2)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox6)
+                        .addComponent(jCheckBox3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox7)
-                        .addGap(71, 71, 71)
-                        .addComponent(jButton1))
+                        .addComponent(jCheckBox5))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox7)
+                .addGap(71, 71, 71)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addContainerGap(61, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        jTextField2.setVisible(false);
+        jLabel2.setVisible(false);
         fFlags[0] = jCheckBox2.isSelected();
         fFlags[1] = jCheckBox3.isSelected();
         fFlags[2] = jCheckBox5.isSelected();
         fFlags[3] = jCheckBox6.isSelected();
         fFlags[4] = jCheckBox7.isSelected();
+        fFlags[5] = true;
         fStrings[0] = jTextField1.getText();
-        fStrings[1] = jTextArea1.getText();
+        fStrings[1] = jTextField2.getText();
         Lookups.singleton(fFlags);
         Lookups.singleton(fStrings);
         dBviewerTopComponent nvtc = (dBviewerTopComponent)WindowManager.getDefault().findTopComponent("dBviewerTopComponent");
         nvtc.refresh();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       fFlags[5] = false;
+       dBviewerTopComponent nvtc = (dBviewerTopComponent)WindowManager.getDefault().findTopComponent("dBviewerTopComponent");
+       nvtc.refresh();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox5;
@@ -192,9 +207,8 @@ public final class FiltersTopComponent extends TopComponent {
     private javax.swing.JCheckBox jCheckBox7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
     @Override
     public void componentOpened() {

@@ -18,6 +18,7 @@ public class InsertCheck extends javax.swing.JDialog {
     public InsertCheck(InsertWinTopComponent parentTC) {
         this.parent = parentTC;
         initComponents();
+        if(parent.im.text.equals("Object already exists, discard")){jButton1.setEnabled(false);}
         this.jTextArea1.setText(parent.im.text);
         this.jTextArea1.setEnabled(false);
         setLocationRelativeTo(parent);
@@ -91,7 +92,7 @@ public class InsertCheck extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         System.out.println("Inserted !");
         parent.im.Insertion();
-        parent.close();
+        parent.im = null;
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
